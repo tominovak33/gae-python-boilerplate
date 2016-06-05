@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %} - Tomi - G.A.E. - Python Boilerplate</title>
+    {% block head %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/style.css" />
+        <!--<link rel="icon" href="assets/favicon.svg"/>-->
+        <link rel="icon" href="assets/profilePictureRoundSmall.png"/>
+    {% endblock head %}
+</head>
+<body>
+<div class="site-masthead" role="banner">
+    <div class="container">
+        <a class="navbar-brand" rel="home" href="/" title="Tomi GAE Boilerplate">
+            <img src="https://tomi33.co.uk/assets/img/profilePictureRoundSmall.png" height="43px" width="43px">
+            <span class="site-name">Google App Engine Boilerplate</span>
+        </a>
+        <button class="navbar-toggler pull-xs-right hidden-sm-up padding-v-medium" type="button" data-toggle="collapse" data-target="#bd-main-nav">
+            ☰
+        </button>
+        <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
+            <nav class="nav site-nav">
+                <a class="nav-item nav-link" href="/">Home</a>
+                <a class="nav-item nav-link" href="/examples">Examples</a>
+                <a class="nav-item nav-link" href="/about">About</a>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-lg-8">
+        {%  block main_content %}
+        {%  endblock main_content %}
+    </div>
+    <div class="col-lg-4 site-sidebar">
+        {%  block sidebar %}
+        {%  endblock sidebar %}
+    </div>
+</div>
+<footer class="site-footer">
+    <p>&copy; 2016 Tomi Novak</p>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+</body>
+</html>
