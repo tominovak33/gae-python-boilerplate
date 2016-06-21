@@ -8,9 +8,28 @@
 {% endblock head %}
 {% block main_content %}
     <h1>Home</h1>
-    <p>
+    <h5>
       {{ description }}
-    </p>
+    </h5>
+    <div class="padding-v-medium">
+        <div>
+            {% if user %}
+                You are logged in as: <strong>{{ user }}</strong>
+            {% else %}
+            <div>
+                You are not currently logged in.
+            </div>
+            {%  endif %}
+        </div>
+        <div>
+            <a class="btn btn-primary" href="{{ url|safe }}">{{ url_linktext }}</a>
+        </div>
+    </div>
+
+    <div class="padding-v-medium">
+        <h3>Examples:</h3>
+        <p><a href="/examples">Click here for some examples of what this webapp does.</a></p>
+    </div>
 {% endblock main_content %}
 {%  block sidebar %}
     <div class="sidebar-module sidebar-module-inset">
@@ -20,7 +39,7 @@
     <div class="sidebar-module sidebar-module-inset">
         <h4>Title</h4>
         <ol class="list-unstyled">
-            <li><a href="#">Example Link</a></li>
+            <li><a href="/examples">Examples</a></li>
             <li><a href="#">Example Link</a></li>
             <li><a href="#">Example Link</a></li>
             <li><a href="#">Example Link</a></li>

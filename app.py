@@ -5,27 +5,29 @@ from webapp2_extras import json
 import MySQLdb
 import config
 
+from google.appengine.api import users
+
 # [START DB]
 # When running on Google App Engine, connect to the cloud database
 # https://cloud.google.com/appengine/docs/python/cloud-sql/#code_sample_overview
-if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/'):
-    db = MySQLdb.connect(
-        host=config.production_database.get('host'),
-        user=config.production_database.get('user'),
-        passwd=config.production_database.get('password'),
-        db=config.production_database.get('name'),
-        cursorclass=MySQLdb.cursors.DictCursor
-    )
-# When running locally, connect to a local db
-else:
-    # add cursorclass=MySQLdb.cursors.DictCursor to constructor means that values can be accessed by their column names
-    db = MySQLdb.connect(
-        host=config.local_database.get('host'),
-        user=config.local_database.get('user'),
-        passwd=config.local_database.get('password'),
-        db=config.local_database.get('name'),
-        cursorclass=MySQLdb.cursors.DictCursor
-    )
+# if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine/'):
+#     db = MySQLdb.connect(
+#         host=config.production_database.get('host'),
+#         user=config.production_database.get('user'),
+#         passwd=config.production_database.get('password'),
+#         db=config.production_database.get('name'),
+#         cursorclass=MySQLdb.cursors.DictCursor
+#     )
+# # When running locally, connect to a local db
+# else:
+#     # add cursorclass=MySQLdb.cursors.DictCursor to constructor means that values can be accessed by their column names
+#     db = MySQLdb.connect(
+#         host=config.local_database.get('host'),
+#         user=config.local_database.get('user'),
+#         passwd=config.local_database.get('password'),
+#         db=config.local_database.get('name'),
+#         cursorclass=MySQLdb.cursors.DictCursor
+#     )
 # [END DB]
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -36,9 +38,25 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 
 class HomeHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
+
+        if user:
+            url = users.create_logout_url(self.request.uri)
+            url_linktext = 'Logout'
+            # nickname = user.nickname() # use later if needed
+
+        else:
+            url = users.create_login_url(self.request.uri)
+            url_linktext = 'Login'
+
+
         template_values = {
+            'user': user,
+            'url': url,
+            'url_linktext': url_linktext,
             'description': 'Tomi - Google App Engine - Python Boilerplate'
         }
+
         template = JINJA_ENVIRONMENT.get_template('templates/home.html')
         self.response.write(template.render(template_values))
 

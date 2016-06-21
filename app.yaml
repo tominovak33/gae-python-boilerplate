@@ -2,6 +2,8 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
+# https://cloud.google.com/appengine/docs/go/config/appref#handlers_element
+
 # [START handlers]
 handlers:
 - url: /favicon\.ico
@@ -10,6 +12,15 @@ handlers:
 
 - url: /assets
   static_dir: assets
+
+- url: /user
+  script: app.app
+  login: required
+
+- url: /admin
+  script: app.app
+  login: admin
+  auth_fail_action: unauthorized # just refuse, don't redirect to signin page
 
 - url: /.*
   script: app.app

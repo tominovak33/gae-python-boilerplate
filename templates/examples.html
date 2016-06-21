@@ -4,8 +4,16 @@
     <p>
       {{ description }}
     </p>
-    <p><a href="foo">Link One</a></p>
-    <p><a href="bar">Link Two</a></p>
+    <p><a href="foo">/foo</a>: - just a page anyone can view. The 'foo' (or equvivalent) part of the url is passed to the request handler as a variable.</p>
+    <p><a href="user">/user</a>: - a user must be logged in (to any Google account) to view this page, if not logged in, they are redirected to a login screen. Upon successful authentiction, they are redirected back to the page they were initially trying to view.</p>
+    <p><a href="admin">/admin</a>: - An admin account is required to view this page, if not logged in at all or lacking administrator priveledges a permission error is shown and the user is <strong>NOT</strong> redirected to a login screen.</p>
+
+    <div>
+        <h3>Note:</h3>
+        <p>The login functionality only <strong>fully</strong> works when the webapp is running on G.A.E.</p>
+        <p>When running locally, a google account is not needed to sign in, but rather a simple interface is shown allowing the imitation of a standard or admin account. - This is done by simply entering an email address and checking an optional box. The rest of the app will then behave as if running on G.A.E.</p>
+    </div>
+
 {% endblock main_content %}
 {%  block sidebar %}
     <div class="sidebar-module sidebar-module-inset">
